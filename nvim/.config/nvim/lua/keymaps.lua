@@ -76,16 +76,7 @@ vim.keymap.set("n", "<Leader>cia", ':AsyncRun coiarm<CR>', {desc = "Conan Instal
 vim.keymap.set("n", "<Leader>cca", ':AsyncRun cocarm<CR>', {desc = "Conan Create arm"})
 
 vim.keymap.set("n", "<leader>cs", ":AsyncStop<CR>", { noremap = true, silent = true, desc = "Stop Async Command" })
--- Terminal - also allows flying through vim windows with alt+hjkl
--- 
-vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
--- Terminal mode mappings
-vim.api.nvim_set_keymap('t', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
---vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n><C-w>', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-k>', '<C-\\><C-n><C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-l>', '<C-\\><C-n><C-w>l', { noremap = true })
-
+-- flying through vim windows with alt+hjkl
 -- Insert mode mappings
 vim.api.nvim_set_keymap('i', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
 vim.api.nvim_set_keymap('i', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
@@ -123,12 +114,10 @@ vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
 vim.keymap.set("n", "<leader>tc", ":set ignorecase! ignorecase?<CR>", { noremap = true, silent = true, desc = "Toggle Case (Search)" })
---
---
+
 -- Keymaps for buffer navigation
-vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', { noremap = true, silent = true , desc= "Buffer Pick"})
-vim.api.nvim_set_keymap('n', '<leader>bca', '<Cmd>BufferCloseAllButCurrent<CR>', { noremap = true, silent = true , desc= "Buffer Close All"})
-vim.api.nvim_set_keymap('n', '<leader>bcf', '<Cmd>BufferClose<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
+vim.api.nvim_set_keymap('n', '<leader>bca', ':%bd|e#|bd#<CR>', { noremap = true, silent = true , desc= "Buffer Close All"})
+vim.api.nvim_set_keymap('n', '<leader>bcf', ':bd<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
 
 vim.keymap.set('n', '<leader>hh',':noh<CR>', { noremap = true, silent = true, desc = "Hide highlight" })
 vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "Buffer Close"})

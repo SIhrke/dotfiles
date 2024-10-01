@@ -8,6 +8,8 @@ require('lazy').setup({
       vim.g.asyncrun_open = 8 -- Set height of quickfix window
     end    
   },
+
+'hrsh7th/cmp-buffer',
 "HiPhish/rainbow-delimiters.nvim",
   -- minimap
   'dstein64/nvim-scrollview',
@@ -61,8 +63,6 @@ require('lazy').setup({
       vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { silent = true, noremap = true })
     end,
   },
-  -- toggleterm 
-  'akinsho/toggleterm.nvim',
   --debug adapter
   'mfussenegger/nvim-dap',
   'nvim-neotest/nvim-nio',
@@ -194,7 +194,7 @@ require('lazy').setup({
       require("nvim-web-devicons").setup {
       override = {
         qml = {
-          icon = "",
+          icon = "",
           color = "#AAFF00",
           name = "qml"
         }
@@ -243,7 +243,6 @@ require("plugin_config.telescope")
 require("plugin_config.treesitter")
 require("plugin_config.mason")
 require("plugin_config.luasnip")
-require("plugin_config.toggleterm")
 require("plugin_config.neotest")
 require("plugin_config.cmake")
 require("plugin_config.dap")
