@@ -219,6 +219,9 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {
+        filters = {
+          git_ignored = false, -- Set this to false to show gitignored files
+        },
         update_focused_file = {
           enable = true,
         }

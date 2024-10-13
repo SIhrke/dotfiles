@@ -1,17 +1,20 @@
 -- Install and configure nvim-dap
 local dap = require('dap')
 
-dap.adapters.lldb = {
-	type = "executable",
-	command = "/usr/bin/lldb-vscode-14", -- adjust as needed
-	name = "lldb"
+--dap.adapters.lldb = {
+--	type = "executable",
+--	command = "/usr/bin/lldb-vscode-14", -- adjust as needed
+--	name = "lldb"
+--}
+dap.adapters.gdb = {
+  type = "executable",
+  command = "/home/sihrke/gdb-15.2/gdb/gdb",
+  args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
 }
 
-
-if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
-  require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { lldb = {'c', 'cpp'} })
-else
   dap.configurations.cpp = {} 
+if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
+  require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { gdb = {'c', 'cpp','qml', 'NvimTree' }})
 end
 
 table.insert(dap.configurations.cpp,{

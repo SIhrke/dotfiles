@@ -13,7 +13,7 @@ cmp.setup {
   },
   completion = {
     completeopt = 'menu,menuone,noinsert',
-    keyword_length = 4
+    keyword_length = 2
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),

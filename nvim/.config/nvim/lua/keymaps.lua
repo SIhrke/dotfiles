@@ -5,7 +5,7 @@
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+--vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
@@ -57,7 +57,12 @@ end, {desc = "Debug Nearest Test"})
 
 local dap = require('dap')
 -- DAP debug
-vim.keymap.set('n', '<F5>', function() dap.continue() end,{ desc = "Debug continue" })
+vim.keymap.set('n', '<F5>', function() 
+
+  if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
+    require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { gdb = {'c', 'cpp','qml', 'NvimTree' }})
+  end
+  dap.continue() end,{ desc = "Debug continue" })
 vim.keymap.set('n', '<F10>', function() dap.step_over() end,{ desc = "Debug step over" })
 vim.keymap.set('n', '<F11>', function() dap.step_into() end,{ desc = "Debug step into" })
 vim.keymap.set('n', '<Leader>rr', function() dap.repl.open() end,{ desc = "[r]un [r]eplay" })
@@ -120,4 +125,8 @@ vim.api.nvim_set_keymap('n', '<leader>bca', ':%bd|e#|bd#<CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', '<leader>bcf', ':bd<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
 
 vim.keymap.set('n', '<leader>hh',':noh<CR>', { noremap = true, silent = true, desc = "Hide highlight" })
+vim.keymap.set('n', '<A-H>', ':vertical resize +2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-J>', ':resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-K>', ':resize +2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<A-L>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
