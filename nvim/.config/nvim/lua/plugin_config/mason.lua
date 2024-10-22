@@ -17,7 +17,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('<leader>gt', vim.lsp.buf.type_definition, '[G]oto [T]ype')
+--  nmap('<leader>gt', vim.lsp.buf.type_definition, '[G]oto [T]ype')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -98,7 +98,7 @@ mason_lspconfig.setup_handlers {
 
 -- Autoformat on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+  pattern = { "*.c", "*.cpp", "*.h", "*.hpp","*.asm" },
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,

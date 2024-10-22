@@ -118,6 +118,7 @@ end
 vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = true, desc = "Toggle Quickfix" })
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
+vim.keymap.set("n", "<leader>cl", ":clast<CR>", { noremap = true, silent = true, desc = "Quickfix Last" })
 vim.keymap.set("n", "<leader>tc", ":set ignorecase! ignorecase?<CR>", { noremap = true, silent = true, desc = "Toggle Case (Search)" })
 
 -- Keymaps for buffer navigation
@@ -129,4 +130,13 @@ vim.keymap.set('n', '<A-H>', ':vertical resize +2<CR>', { noremap = true, silent
 vim.keymap.set('n', '<A-J>', ':resize -2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-K>', ':resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-L>', ':vertical resize -2<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
+vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "GitBlame Toggle"})
+vim.keymap.set('n', '<leader>dt', function()
+if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
+    print("Diagnostics enabled")
+  else
+    vim.diagnostic.disable()
+    print("Diagnostics disabled")
+  end
+end, { silent = true, noremap = true ,desc= "Diagnostics Toggle"})
