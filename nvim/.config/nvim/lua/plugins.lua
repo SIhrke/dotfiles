@@ -6,20 +6,19 @@ require('lazy').setup({
     lazy = false,
     config = function()
       vim.g.asyncrun_open = 8 -- Set height of quickfix window
-    end    
+    end
   },
-
-'hrsh7th/cmp-buffer',
-"HiPhish/rainbow-delimiters.nvim",
+  'hrsh7th/cmp-buffer',
+  --"HiPhish/rainbow-delimiters.nvim",
   -- minimap
   'dstein64/nvim-scrollview',
- {
-   "lukas-reineke/indent-blankline.nvim",
-   main = "ibl",
-   ---@module "ibl"
-   ---@type ibl.config
-   opts = {},
- },
+  --{
+  --  "lukas-reineke/indent-blankline.nvim",
+  --  main = "ibl",
+  --  ---@module "ibl"
+  --  ---@type ibl.config
+  --  opts = {},
+  --},
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -69,7 +68,6 @@ require('lazy').setup({
   { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  'Civitasv/cmake-tools.nvim',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -189,16 +187,16 @@ require('lazy').setup({
       },
     },
   },{
-  'nvim-tree/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
     config = function()
       require("nvim-web-devicons").setup {
-      override = {
-        qml = {
-          icon = "",
-          color = "#AAFF00",
-          name = "qml"
-        }
-       };
+        override = {
+          qml = {
+            icon = "",
+            color = "#AAFF00",
+            name = "qml"
+          }
+        };
       }
     end,
   },
@@ -249,5 +247,5 @@ require("plugin_config.luasnip")
 require("plugin_config.neotest")
 require("plugin_config.cmake")
 require("plugin_config.dap")
-require("plugin_config.ibl")
-require('rainbow-delimiters.setup').setup {}
+--require("plugin_config.ibl")
+--require('rainbow-delimiters.setup').setup {}
