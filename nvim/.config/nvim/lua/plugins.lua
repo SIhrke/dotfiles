@@ -8,6 +8,7 @@ require('lazy').setup({
       vim.g.asyncrun_open = 8 -- Set height of quickfix window
     end
   },
+
   'hrsh7th/cmp-buffer',
   --"HiPhish/rainbow-delimiters.nvim",
   -- minimap
@@ -49,8 +50,8 @@ require('lazy').setup({
   --  version = '^1.0.0', -- optional: only update when a new 1.x version is released
   --},
   -- Git related plugins   
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  --'tpope/vim-fugitive',
+  --'tpope/vim-rhubarb',
   'f-person/git-blame.nvim',
 
   {
@@ -107,38 +108,6 @@ require('lazy').setup({
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-      end,
     },
   },
 
@@ -245,7 +214,6 @@ require("plugin_config.treesitter")
 require("plugin_config.mason")
 require("plugin_config.luasnip")
 require("plugin_config.neotest")
-require("plugin_config.cmake")
 require("plugin_config.dap")
 --require("plugin_config.ibl")
 --require('rainbow-delimiters.setup').setup {}

@@ -12,21 +12,21 @@ dap.adapters.gdb = {
   args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
 }
 
-  dap.configurations.cpp = {} 
+dap.configurations.cpp = {} 
 if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
   require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { gdb = {'c', 'cpp','qml', 'NvimTree' }})
 end
 
 table.insert(dap.configurations.cpp,{
-    name = "Launch file",
-    type = "gdb",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = true,
-  });
+  name = "Launch file",
+  type = "gdb",
+  request = "launch",
+  program = function()
+    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+  end,
+  cwd = '${workspaceFolder}',
+  stopOnEntry = true,
+});
 
 -- Configure nvim-dap-ui
 local dapui = require("dapui")
@@ -58,22 +58,22 @@ dapui.setup({
 local function open_debug_tab()
 
 
-    -- Open a new tab
-    vim.cmd("tabnew")
-    vim.t.debug_tab=true
-    vim.api.nvim_tabpage_set_var(0, 'tabname', 'Debug')
-    -- Open dap-ui
-    dapui.open()
+  -- Open a new tab
+  vim.cmd("tabnew")
+  vim.t.debug_tab=true
+  vim.api.nvim_tabpage_set_var(0, 'tabname', 'Debug')
+  -- Open dap-ui
+  dapui.open()
 end
 
 -- Function to close debug tab and restore previous layout
 local function close_debug_tab()
-    if vim.t.debug_tab ~= nil then
-      -- Close dap-ui
-      dapui.close()
-      -- Close the current tab
-      vim.cmd("tabclose")
-    end
+  if vim.t.debug_tab ~= nil then
+    -- Close dap-ui
+    dapui.close()
+    -- Close the current tab
+    vim.cmd("tabclose")
+  end
 end
 
 -- Set up DAP event listeners
