@@ -139,3 +139,4 @@ setopt HIST_VERIFY              # Don't execute immediately upon history expansi
 # History format
 export HISTTIMEFORMAT="[%F %T] "
 export PATH="/home/sihrke/.local/bin:$PATH"
+alias gg='lazygit'

@@ -95,7 +95,7 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
+vim.lsp.set_log_level("off")
 -- Autoformat on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.c", "*.cpp", "*.h", "*.hpp","*.asm" },

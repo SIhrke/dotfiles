@@ -1,7 +1,9 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 local ignore_filetypes_list = {
-    "%.ts" 
+  "%.ts",
+  "^.git/",
+  "^build/"
 }
 require('telescope').setup {
   defaults = {

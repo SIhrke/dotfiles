@@ -21,6 +21,10 @@ require('lazy').setup({
   --  opts = {},
   --},
   {
+    "gbprod/substitute.nvim",
+    opts = {}
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
@@ -171,6 +175,7 @@ require('lazy').setup({
   },
   {
     -- Highlight, edit, and navigate code
+
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -186,6 +191,13 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {
+        actions = {
+          open_file = {
+            window_picker = {
+              enable = false  -- Disable the window picker
+            }
+          }
+        },
         filters = {
           git_ignored = false, -- Set this to false to show gitignored files
         },

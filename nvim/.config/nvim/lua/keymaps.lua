@@ -116,6 +116,8 @@ end
 
 -- Keymaps for quickfix navigation
 vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = true, desc = "Toggle Quickfix" })
+vim.keymap.set("n", "<leader>qn", ":cnewer<CR>", { noremap = true, silent = true, desc = "[Q]uickfix [N]ext List" })
+vim.keymap.set("n", "<leader>qp", ":colder<CR>", { noremap = true, silent = true, desc = "[Q]uickfix [P]revious List" })
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
 vim.keymap.set("n", "<leader>cl", ":clast<CR>", { noremap = true, silent = true, desc = "Quickfix Last" })
@@ -131,6 +133,7 @@ vim.keymap.set('n', '<A-J>', ':resize -2<CR>', { noremap = true, silent = true }
 vim.keymap.set('n', '<A-K>', ':resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-L>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "GitBlame Toggle"})
+
 vim.keymap.set('n', '<leader>dt', function()
   if vim.diagnostic.is_disabled() then
     vim.diagnostic.enable()
@@ -140,3 +143,8 @@ vim.keymap.set('n', '<leader>dt', function()
     print("Diagnostics disabled")
   end
 end, { silent = true, noremap = true ,desc= "Diagnostics Toggle"})
+
+vim.keymap.set("n", "s", require('substitute').operator, { noremap = true })
+vim.keymap.set("n", "ss", require('substitute').line, { noremap = true })
+vim.keymap.set("n", "S", require('substitute').eol, { noremap = true })
+vim.keymap.set("x", "s", require('substitute').visual, { noremap = true })
