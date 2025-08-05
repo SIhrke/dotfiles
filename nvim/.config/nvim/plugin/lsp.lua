@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 
 lspconfig.clangd.setup {
   cmd = { "clangd-14" },  -- or full path "/usr/bin/clangd-14"
-  -- other config like on_attach, capabilities, etc.
+  filetypes = { "c", "cpp", "objc", "objcpp" },
 }
 
 -- Setup neovim lua configuration

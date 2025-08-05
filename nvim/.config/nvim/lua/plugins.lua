@@ -219,11 +219,5 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
-require("plugin_config.telescope")
-require("plugin_config.treesitter")
-require("plugin_config.lsp")
-require("plugin_config.luasnip")
-require("plugin_config.neotest")
-require("plugin_config.dap")
 --require("plugin_config.ibl")
 --require('rainbow-delimiters.setup').setup {}
