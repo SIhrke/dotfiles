@@ -80,8 +80,6 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -223,7 +221,7 @@ require('lazy').setup({
 }, {})
 require("plugin_config.telescope")
 require("plugin_config.treesitter")
-require("plugin_config.mason")
+require("plugin_config.lsp")
 require("plugin_config.luasnip")
 require("plugin_config.neotest")
 require("plugin_config.dap")
