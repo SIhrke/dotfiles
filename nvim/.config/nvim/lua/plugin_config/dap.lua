@@ -8,7 +8,7 @@ local dap = require('dap')
 --}
 dap.adapters.gdb = {
   type = "executable",
-  command = "/home/sihrke/gdb-15.2/gdb/gdb",
+  command = "/usr/bin/gdb",
   args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
 }
 

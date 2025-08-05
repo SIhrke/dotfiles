@@ -140,3 +140,5 @@ setopt HIST_VERIFY              # Don't execute immediately upon history expansi
 export HISTTIMEFORMAT="[%F %T] "
 export PATH="/home/sihrke/.local/bin:$PATH"
 alias gg='lazygit'
+alias plantuml='java -jar /home/sihrke/.local/share/plantuml-mit-1.2025.3.jar'
+
