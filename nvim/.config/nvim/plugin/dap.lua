@@ -53,34 +53,17 @@ dapui.setup({
   },
 })
 
-
--- Function to save window layout and open debug tab
-local function open_debug_tab()
-
-
-  -- Open a new tab
-  vim.cmd("tabnew")
-  vim.t.debug_tab=true
-  vim.api.nvim_tabpage_set_var(0, 'tabname', 'Debug')
-  -- Open dap-ui
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.attach.dapui_config = function()
   dapui.open()
 end
-
--- Function to close debug tab and restore previous layout
-local function close_debug_tab()
-  if vim.t.debug_tab ~= nil then
-    -- Close dap-ui
-    dapui.close()
-    -- Close the current tab
-    vim.cmd("tabclose")
-  end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
 end
 
--- Set up DAP event listeners
-dap.listeners.after.event_initialized["dapui_config"] = open_debug_tab
-dap.listeners.before.event_terminated["dapui_config"] = close_debug_tab
-dap.listeners.before.event_exited["dapui_config"] = close_debug_tab
-
--- Keymaps for manual control (optional)
-vim.keymap.set('n', '<leader>do', open_debug_tab, { desc = "Open Debug Tab" })
-vim.keymap.set('n', '<leader>dc', close_debug_tab, { desc = "Close Debug Tab" })

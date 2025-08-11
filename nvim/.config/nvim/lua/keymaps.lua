@@ -40,7 +40,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.api.nvim_set_keymap('n', '<leader>o', ':NvimTreeToggle<CR>', { noremap = true, silent = true , desc = "Toggle Explorer" })
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "Focus Explorer" } )
 require('scrollview').setup()
-vim.api.nvim_set_keymap('n', '<Leader>gs', ':LspClangdSwitchSourceHeader<CR>', { noremap = true, silent = true ,desc = "Switch Header/Source"})
+vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true ,desc = "Switch Header/Source"})
 vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true, desc = "Write all Buffers" } )
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
