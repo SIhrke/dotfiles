@@ -33,28 +33,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- Autocommand to run qmlformat on save for QML files
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.qml",
-  callback = function()
-    local filename = vim.fn.expand("%:p")
-    local cmd = string.format("qmlformat -i %s", filename)
-    
-    vim.fn.jobstart(cmd, {
-      on_exit = function(_, exit_code)
-        if exit_code == 0 then
-          print("QML formatting successful")
-          -- Reload the buffer to show changes
-          vim.cmd("e!")
-        else
-          print("QML formatting failed")
-        end
-      end,
-      stdout_buffered = true,
-      stderr_buffered = true,
-    })
-  end,
-})
 
 
 -- Trigger autoread when files change on disk

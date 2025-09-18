@@ -67,7 +67,8 @@ vim.keymap.set('n', '<F10>', function() dap.step_over() end,{ desc = "Debug step
 vim.keymap.set('n', '<F11>', function() dap.step_into() end,{ desc = "Debug step into" })
 vim.keymap.set('n', '<Leader>rr', function() dap.repl.open() end,{ desc = "[r]un [r]eplay" })
 vim.keymap.set('n', '<Leader>rl', function() dap.run_last() end,{ desc = "[r]un [l]ast" })
-vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc = "Toggle breakpoint" })
+-- vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc = "Toggle breakpoint" })
+vim.keymap.set('n', '<Leader>b', "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",{ desc = "Toggle breakpoint" })
 
 -- Build with conan
 vim.keymap.set("n", "<Leader>cbx", ':AsyncRun cobx86<CR>', {desc = "Conan Build x86"})

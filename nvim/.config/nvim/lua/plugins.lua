@@ -67,6 +67,14 @@ require('lazy').setup({
       vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { silent = true, noremap = true })
     end,
   },
+  {
+    "Weissle/persistent-breakpoints.nvim",
+    config = function()
+      require("persistent-breakpoints").setup {
+        load_breakpoints_event = { "BufReadPost" },
+      }
+    end,
+  },
   --debug adapter
   'mfussenegger/nvim-dap',
   'nvim-neotest/nvim-nio',
