@@ -164,3 +164,7 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
+-- Keymapping to open dap-ui manually
+--
+--
+vim.keymap.set('n', '<leader>do', dapui.toggle, { desc = '[D]ebug [O]open' })
