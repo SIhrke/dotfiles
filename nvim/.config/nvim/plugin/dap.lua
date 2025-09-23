@@ -4,7 +4,7 @@
 -- ===============================
 
 local dap = require("dap")
-local dapui = require("dapui")
+local dapui = require("dap-view")
 
 -- === DAP Adapters ===
 dap.adapters.gdb = {
@@ -119,8 +119,9 @@ table.insert(dap.configurations.cpp, {
         return save_input(choice)
     end,
     cwd = "${workspaceFolder}",
-    stopOnEntry = true,
+    stopOnEntry = false,
 })
+
 
 -- === Load VSCode launch.json if exists ===
 local launch_json = '.vscode/nvim_launch.json'
@@ -132,24 +133,17 @@ end
 
 -- === DAP-UI Setup ===
 dapui.setup({
-    layouts = {
-        {
-            elements = {
-                { id = "scopes", size = 0.25 },
-                "breakpoints",
-                "stacks",
-                "watches",
-            },
-            size = 40,
-            position = "left",
-        },
-        {
-            elements = { "repl" },
-            size = 0.25,
-            position = "bottom",
-        },
-    },
+    winbar={
+     sections = {
+    "scopes",
+    "breakpoints",
+    "threads",
+    "watches",
+    "repl",
+      },  
+    }
 })
+
 
 
 dap.listeners.before.attach.dapui_config = function()

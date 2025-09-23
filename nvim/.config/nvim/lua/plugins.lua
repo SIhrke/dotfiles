@@ -78,7 +78,12 @@ require('lazy').setup({
   --debug adapter
   'mfussenegger/nvim-dap',
   'nvim-neotest/nvim-nio',
-  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+  {
+        "igorlfs/nvim-dap-view",
+        ---@module 'dap-view'
+        ---@type dapview.Config
+        opts = {},
+  },
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   -- NOTE: This is where your plugins related to LSP can be installed.
