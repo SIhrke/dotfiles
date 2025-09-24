@@ -60,7 +60,7 @@ local dap = require('dap')
 vim.keymap.set('n', '<F5>', function() 
 
   if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
-    require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { gdb = {'c', 'cpp','qml', 'NvimTree' }})
+    require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { codelldb = {'c', 'cpp','qml', 'NvimTree' }})
   end
   dap.continue() end,{ desc = "Debug continue" })
 vim.keymap.set('n', '<F10>', function() dap.step_over() end,{ desc = "Debug step over" })

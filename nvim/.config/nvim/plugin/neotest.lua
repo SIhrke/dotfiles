@@ -3,7 +3,7 @@ require("neotest").setup({
     require("neotest-gtest").setup({
       root_files = { "CMakeLists.txt", "Makefile", ".git" },
       build_directory = "build/x86/Debug",
-      debug_adapter = "gdb",
+      debug_adapter = "codelldb",
       args = { "--gtest_color=yes" },
       filter_dir = function(name)
         return name ~= "build"

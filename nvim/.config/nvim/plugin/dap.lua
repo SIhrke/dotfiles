@@ -7,10 +7,22 @@ local dap = require("dap")
 local dapui = require("dap-view")
 
 -- === DAP Adapters ===
+-- this is the native gdb debug adapter -> not as good! some features are missing and its hanging 50% of the time..
 dap.adapters.gdb = {
     type = "executable",
     command = "/usr/bin/gdb",  -- adjust path to your gdb
     args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+}
+    
+-- codelldb is very good :)
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    -- install codelldb before using this! its a debug adapter from lldb to nvim-dap
+    command = "/home/sihrke/codelldb_install/extension/adapter/codelldb", -- change this!
+    args = { "--port", "${port}" },
+  },
 }
 
 -- Optional LLDB adapter
@@ -53,7 +65,7 @@ pb.setup({
 dap.configurations.cpp = dap.configurations.cpp or {}
 table.insert(dap.configurations.cpp, {
     name = "Launch file",
-    type = "gdb",
+    type = "codelldb",
     request = "launch",
     program = function()
         local targets = load_targets()
@@ -127,7 +139,7 @@ table.insert(dap.configurations.cpp, {
 local launch_json = '.vscode/nvim_launch.json'
 if vim.fn.filereadable(launch_json) == 1 then
     require('dap.ext.vscode').load_launchjs(launch_json, {
-        gdb = { 'c', 'cpp', 'qml', 'NvimTree' },
+        codelldb = { 'c', 'cpp', 'qml', 'NvimTree' },
     })
 end
 
@@ -141,6 +153,7 @@ dapui.setup({
     "watches",
     "repl",
       },  
+    default_section = "scopes",
     }
 })
 
