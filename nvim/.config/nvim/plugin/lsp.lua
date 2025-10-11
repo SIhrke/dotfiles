@@ -1,21 +1,20 @@
-local lspconfig = require('lspconfig')
 
 -- Shared capabilities (for nvim-cmp etc.)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- C/C++ (clangd)
-lspconfig.clangd.setup {
+vim.lsp.config.clangd = {
   cmd = { "clangd-14" },  -- adjust if needed
   capabilities = capabilities,
 }
 
 -- QML (qmlls)
-lspconfig.qmlls.setup {
+vim.lsp.config.qmlls = {
   cmd = { "qmlls" },  -- make sure it's in PATH
   filetypes = { "qml" },
   capabilities = capabilities,
 }
-
+vim.lsp.enable({'clangd', 'qmlls'})
 -- Lua (neodev)
 require('neodev').setup()
 

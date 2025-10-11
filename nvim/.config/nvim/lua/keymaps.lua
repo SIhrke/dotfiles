@@ -40,7 +40,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.api.nvim_set_keymap('n', '<leader>o', ':NvimTreeToggle<CR>', { noremap = true, silent = true , desc = "Toggle Explorer" })
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "Focus Explorer" } )
 require('scrollview').setup()
-vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true ,desc = "Switch Header/Source"})
+vim.api.nvim_set_keymap('n', '<Leader>gs', ':LspClangdSwitchSourceHeader<CR>', { noremap = true, silent = true ,desc = "Switch Header/Source"})
 vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true, desc = "Write all Buffers" } )
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -51,9 +51,25 @@ vim.keymap.set("n", "<Leader>qq", ':qall<CR>')
 vim.keymap.set("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run nearest test" })
 vim.keymap.set("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Run current file" })
 vim.keymap.set("n", "<leader>ts", function() require("neotest").summary.toggle() end, { desc = "Toggle test summary" })
+local last_test = {}
+-- Debug nearest test and save its ID
 vim.keymap.set('n', '<leader>td', function()
-  require("neotest").run.run({strategy = "dap"})
-end, {desc = "Debug Nearest Test"})
+  local neotest = require("neotest")
+  local test_id = neotest.run.run({strategy = "dap"})
+  if test_id then
+    last_test.id = test_id
+  end
+end, { desc = "Debug Nearest Test" })
+
+-- Debug last test again
+vim.keymap.set('n', '<leader>tD', function()
+  local neotest = require("neotest")
+  if last_test.id then
+    neotest.run.run({id = last_test.id, strategy = "dap"})
+  else
+    vim.notify("No test has been debugged yet", vim.log.levels.WARN)
+  end
+end, { desc = "Debug Last Test Again" })
 
 local dap = require('dap')
 -- DAP debug

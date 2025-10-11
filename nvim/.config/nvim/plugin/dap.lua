@@ -4,25 +4,14 @@
 -- ===============================
 
 local dap = require("dap")
-local dapui = require("dap-view")
 
 -- === DAP Adapters ===
--- this is the native gdb debug adapter -> not as good! some features are missing and its hanging 50% of the time..
-dap.adapters.gdb = {
-    type = "executable",
-    command = "/usr/bin/gdb",  -- adjust path to your gdb
-    args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
-}
     
 -- codelldb is very good :)
 dap.adapters.codelldb = {
-  type = "server",
-  port = "${port}",
-  executable = {
+  type = "executable",
     -- install codelldb before using this! its a debug adapter from lldb to nvim-dap
     command = "/home/sihrke/codelldb_install/extension/adapter/codelldb", -- change this!
-    args = { "--port", "${port}" },
-  },
 }
 
 -- Optional LLDB adapter
@@ -67,6 +56,7 @@ table.insert(dap.configurations.cpp, {
     name = "Launch file",
     type = "codelldb",
     request = "launch",
+    terminal = "integrated",  
     program = function()
         local targets = load_targets()
         local cwd = vim.fn.getcwd()
@@ -131,7 +121,6 @@ table.insert(dap.configurations.cpp, {
         return save_input(choice)
     end,
     cwd = "${workspaceFolder}",
-    stopOnEntry = false,
 })
 
 
@@ -142,36 +131,32 @@ if vim.fn.filereadable(launch_json) == 1 then
         codelldb = { 'c', 'cpp', 'qml', 'NvimTree' },
     })
 end
+require("dapui").setup()
 
--- === DAP-UI Setup ===
-dapui.setup({
-    winbar={
-     sections = {
-    "scopes",
-    "breakpoints",
-    "threads",
-    "watches",
-    "repl",
-      },  
-    default_section = "scopes",
-    }
-})
-
-
-
-dap.listeners.before.attach.dapui_config = function()
-  dapui.open()
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  require("dapui").open()
 end
-dap.listeners.before.launch.dapui_config = function()
-  dapui.open()
+
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  require("dapui").close()
 end
-dap.listeners.before.event_terminated.dapui_config = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-  dapui.close()
+
+dap.listeners.before.event_exited["dapui_config"] = function()
+  require("dapui").close()
 end
 -- Keymapping to open dap-ui manually
 --
 --
-vim.keymap.set('n', '<leader>do', dapui.toggle, { desc = '[D]ebug [O]open' })
+vim.keymap.set('n', '<leader>do', require("dapui").toggle, { desc = '[D]ebug [O]open' })
+
+-- Custom DAP signs
+
+vim.fn.sign_define("DapBreakpoint", {
+    text = "",          -- or use a Nerd Font icon like ""
+    texthl = "DapBreakpointRed", -- custom highlight
+    linehl = "",
+    numhl = "",
+})
+
+-- Define the red highlight
+vim.api.nvim_set_hl(0, "DapBreakpointRed", { fg = "#FF5555", bold = true })
