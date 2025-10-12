@@ -32,11 +32,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-    nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-    nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-    nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('gd', function() vim.lsp.buf.definition() end, '[G]oto [D]efinition')
+
+    nmap('gr', function()
+      vim.lsp.buf.references()
+    end, '[G]oto [R]eferences')
+
+
+    nmap('<leader>D', function()
+      vim.lsp.buf.type_definition()
+    end, 'Type [D]efinition')
+
+    nmap('<leader>ds', function()
+      vim.lsp.buf.document_symbol()
+    end, '[D]ocument [S]ymbols')
 
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
