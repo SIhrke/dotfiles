@@ -72,3 +72,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.lsp.set_log_level("off")
 
+-- Configure diagnostics globally with custom icons
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '󰌵',
+    },
+  },
+})
