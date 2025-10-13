@@ -150,6 +150,7 @@ vim.keymap.set('n', '<A-J>', ':resize -2<CR>', { noremap = true, silent = true }
 vim.keymap.set('n', '<A-K>', ':resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-L>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "GitBlame Toggle"})
+vim.keymap.set("n", "<leader>gh", ":LazyGitFilterCurrentFile<CR>", { desc = "File history" })
 
 vim.keymap.set('n', '<leader>dt', function()
   if vim.diagnostic.is_disabled() then
