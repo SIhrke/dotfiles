@@ -218,7 +218,7 @@ require('lazy').setup({
         }
       }
     end,
-  }
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -231,7 +231,18 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+    {
+    "timantipov/md-table-tidy.nvim",
+    ft = "markdown",
+    opts = {
+      padding = 1,
+      keymap = {
+        table_tidy = "<leader>tt",
+        table_tidy_all = "<leader>ta",
+      },
+    },
+  },
+
 }, {})
 --require("plugin_config.ibl")
 --require('rainbow-delimiters.setup').setup {}
