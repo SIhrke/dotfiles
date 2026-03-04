@@ -36,14 +36,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 
 -- Trigger autoread when files change on disk
-vim.api.nvim_create_autocmd({"FocusGained", "BufEnter", "CursorHold", "CursorHoldI"}, {
-  pattern = "*",
-  callback = function()
-    if vim.fn.mode() ~= "c" then
-      vim.cmd("checktime")
-    end
-  end
-})
+--vim.api.nvim_create_autocmd({"FocusGained", "BufEnter", "CursorHold", "CursorHoldI"}, {
+--  pattern = "*",
+--  callback = function()
+--    if vim.fn.mode() ~= "c" then
+--      vim.cmd("checktime")
+--    end
+--  end
+--})
 
 -- Notification after file change
 vim.api.nvim_create_autocmd("FileChangedShellPost", {

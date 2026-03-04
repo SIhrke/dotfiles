@@ -14,6 +14,7 @@ vim.lsp.config.qmlls = {
   filetypes = { "qml" },
   capabilities = capabilities,
 }
+
 vim.lsp.enable({'clangd', 'qmlls'})
 -- Lua (neodev)
 require('neodev').setup()
@@ -33,6 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
     nmap('gd', function() vim.lsp.buf.definition() end, '[G]oto [D]efinition')
+    nmap('gt', function() vim.lsp.buf.type_definition() end, '[G]oto [T]ype Definition')
 
     nmap('gr', function()
       vim.lsp.buf.references()
@@ -48,6 +50,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[D]ocument [S]ymbols')
 
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+    -- nmap('S', vim.lsp.buf.signature_help, '[S]ignature Help')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -63,7 +66,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Autoformat on save (C/C++ & asm only for now)
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 vim.api.nvim_create_autocmd("BufWritePre", {
+  group= augroup,
   pattern = { "*.qml", "*.c", "*.cpp", "*.h", "*.hpp", "*.asm" },
   callback = function()
     vim.lsp.buf.format({ async = false })

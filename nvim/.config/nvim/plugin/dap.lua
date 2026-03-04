@@ -57,6 +57,7 @@ table.insert(dap.configurations.cpp, {
     type = "codelldb",
     request = "launch",
     terminal = "integrated",  
+    stopOnException = false,   
     program = function()
         local targets = load_targets()
         local cwd = vim.fn.getcwd()
