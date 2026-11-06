@@ -138,7 +138,10 @@ setopt HIST_VERIFY              # Don't execute immediately upon history expansi
 
 # History format
 export HISTTIMEFORMAT="[%F %T] "
-export PATH="/home/sihrke/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 alias gg='lazygit'
-alias plantuml='java -jar /home/sihrke/.local/share/plantuml-mit-1.2025.3.jar'
+alias plantuml='java -jar $HOME/.local/share/plantuml-mit-1.2025.3.jar'
+alias conan2="~/.conan2-env/bin/conan"
 
+
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env

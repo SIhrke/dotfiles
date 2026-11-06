@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 -- Configure diagnostics globally with custom icons
 vim.diagnostic.config({

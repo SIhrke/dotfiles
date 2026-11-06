@@ -187,12 +187,23 @@ require('lazy').setup({
   },
   {
     -- Highlight, edit, and navigate code
+    -- `main` branch = the post-rewrite API (see plugin/treesitter.lua).
+    -- This plugin does not support lazy-loading (upstream requirement).
 
     'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    init = function()
+      -- disable built-in ftplugin text-object maps so ours (set in
+      -- plugin/treesitter.lua) don't conflict
+      vim.g.no_plugin_maps = true
+    end,
   },
   {
     "nvim-tree/nvim-tree.lua",
@@ -203,6 +214,12 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {
+        view={
+          adaptive_size = true
+        },
+         renderer = {
+          symlink_destination = false
+        },
         actions = {
           open_file = {
             window_picker = {
@@ -242,6 +259,19 @@ require('lazy').setup({
       },
     },
   },
+  {
+  "stevearc/conform.nvim",
+  opts = {
+    formatters_by_ft = {
+      python = { "isort", "black" },
+    },
+
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
+    },
+  },
+}
 
 }, {})
 --require("plugin_config.ibl")

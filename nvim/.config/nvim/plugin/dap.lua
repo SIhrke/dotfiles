@@ -11,7 +11,7 @@ local dap = require("dap")
 dap.adapters.codelldb = {
   type = "executable",
     -- install codelldb before using this! its a debug adapter from lldb to nvim-dap
-    command = "/home/sihrke/codelldb_install/extension/adapter/codelldb", -- change this!
+    command = vim.fn.expand("~/codelldb_install/extension/adapter/codelldb"),
 }
 
 -- Optional LLDB adapter
